@@ -1,0 +1,182 @@
+<apex:page controller="ResourceResumePageController" renderAs="PDF" showHeader="false" sidebar="false" lightningStylesheets="false" standardStylesheets="false" docType="html-5.0" applyBodyTag="false" cache="false">
+    
+    <head>
+        <style type="text/css" media="print">
+            @page {
+            size: A4;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left:0;
+            margin-right: 0;
+            }
+        </style>
+        <style>
+        </style>
+    </head>
+    <body style="margin: 0;font-family:Times New Roman;">
+        <table style="margin: 0;border-spacing:0;">
+            <tr>
+                <td style="vertical-align:top;background-color:#00c300;width:280px;height:1122px;">
+                    <div style="padding-top:40px;text-align:center;">
+                        <img style="height:200px;border:4px solid white;" src="{!photoSrc}"/>
+                    </div>
+                    <br/>
+                    <div style="padding:10px;font-size:14px;">
+                        <div style="background-color:white;font-size:16px;font-weight:BOLD">
+                            <div style="padding:5px;padding-left:10px;">
+                                Contact Details
+                            </div>
+                        </div>
+                        <table style="margin: 0;border-spacing:0;color:white;padding-left:5px;">
+                            <tr >
+                                <td style="padding-top:8px;">
+                                    <img src="{!URLFOR($Resource.Email_Icon)}" height="16"/>
+                                </td>
+                                <td style="padding-top:8px;padding-left:5px;">
+                                    {!resource.Email__c}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-top:8px;">
+                                    <img src="{!URLFOR($Resource.Phone_Icon)}" height="16"/>
+                                </td>
+                                <td style="padding-top:8px;padding-left:5px;">
+                                    {!resource.Mobile_Number__c}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-top:8px;">
+                                    <img src="{!URLFOR($Resource.Home_Icon)}" height="16"/>
+                                </td>
+                                <td style="padding-top:8px;padding-left:5px;">
+                                    {!resource.Current_City__c}, {!resource.Current_State__c}, {!resource.Current_Country__c}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="padding:10px;padding-bottom:0;font-size:14px;color:white;">
+                         <div style="background-color:white;font-size:16px;font-weight:BOLD">
+                            <div style="padding:5px;padding-left:10px;color:black;">
+                                Education
+                            </div>
+                        </div>
+                        <apex:repeat var="edu" value="{!educationList}">
+                            <li style="padding-bottom:10px;">
+                                <div>
+                                    <apex:outputText value="{0,date,yyyy}">
+                                        <apex:param value="{!edu.From_Date__c}" /> 
+                                    </apex:outputText> -&nbsp;
+                                    <apex:outputText value="{0,date,yyyy}">
+                                        <apex:param value="{!edu.To_Date__c}" /> 
+                                    </apex:outputText>
+                                </div>
+                                <div>
+                                    {!edu.Degree__c}, 
+                                    <apex:outputPanel rendered="{!IF(edu.Field_of_Study__c != '',true,false)}">
+                                        {!edu.Field_of_Study__c},
+                                    </apex:outputPanel> 
+                                </div>
+                                <div>
+                                    {!edu.Institution__c}
+                                </div>
+                            </li>
+                        </apex:repeat>
+                    </div>
+                    <div style="padding:10px;padding-bottom:0;font-size:14px;color:white;">
+                        <div style="background-color:white;font-size:16px;font-weight:BOLD;">
+                            <div style="padding:5px;padding-left:10px;color:black;">
+                                Salesforce Cloud Skills
+                            </div>
+                        </div>
+                        <apex:repeat var="skill" value="{!implementationSkills}">
+                            <li style="padding-bottom:10px;">
+                                {!skill}
+                            </li>
+                        </apex:repeat>
+                    </div>
+                    <div style="padding:10px;padding-bottom:0;font-size:14px;color:white;">
+                        <div style="background-color:white;font-size:16px;font-weight:BOLD;">
+                            <div style="padding:5px;padding-left:10px;color:black;">
+                                Languages Known
+                            </div>
+                        </div>
+                        <apex:repeat var="lang" value="{!languages}">
+                            <li style="padding-bottom:10px;">
+                                {!lang}
+                            </li>
+                        </apex:repeat>
+                    </div>
+                </td>
+                <td style="vertical-align:top;padding-left: 20px;padding-right: 20px;padding-top: 45px;">
+                    <div style="text-transform: uppercase;color:#00c300;font-size: 32px;font-weight: BOLD;">
+                        {!resource.Name}
+                    </div>
+                    <div style="font-size: 22px;padding-top:5px;">
+                        {!resource.Role__c}
+                    </div>
+                    <br/>
+                    <div style="font-size: 14px">
+                        {!resource.About__c}
+                    </div>
+                    <br/>
+                    <div style="font-size: 14px">
+                       <div style="color:#00c300;font-size: 16px;font-weight:BOLD;">
+                           Work Experiences
+                        </div>
+                        <apex:repeat var="exp" value="{!workExpList}">
+                            <div style="color:#00c300;font-size: 16px;padding-top:10px;">
+                                {!exp.Company_Name__r.Name} - {!exp.Job_Title__c},&nbsp;
+                                <apex:outputText value="{0,date,MMM yyyy}">
+                                    <apex:param value="{!exp.From_Date__c}" /> 
+                                </apex:outputText> -&nbsp;
+                                <apex:outputPanel rendered="{!exp.Currently_Working_Here__c}">
+                                    Present
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!!exp.Currently_Working_Here__c}">
+                                    <apex:outputText value="{0,date,MMM yyyy}">
+                                    <apex:param value="{!exp.To_Date__c}" /> 
+                                </apex:outputText>
+                                </apex:outputPanel>
+                            </div>
+                            <apex:outputPanel rendered="{!IF(workAccomplishMap[exp.Id] != NULL,true,false)}">
+                                <table style="margin: 0;border-spacing:0;padding-left:20px;padding-top:10px;">
+                                    <apex:repeat var="acc" value="{!workAccomplishMap[exp.Id]}">
+                                        <tr >
+                                            <td style="vertical-align:top;">
+                                                <img src="{!URLFOR($Resource.Right_Arrow_Icon)}" height="12"/>
+                                            </td>
+                                            <td style="vertical-align:top;">
+                                                {!acc.Accomplishment_Heading__c}
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </table>
+                            </apex:outputPanel>
+                        </apex:repeat>
+                    </div>
+                    <br/>
+                    <div style="font-size: 14px">
+                       <div style="color:#00c300;font-size: 16px;font-weight:BOLD;">
+                           Certifications
+                        </div>
+                        <apex:repeat var="cert" value="{!certificateList}">
+                            <li style="padding-bottom:10px;">
+                                {!cert.Certification_Name__r.Certification_Name__c}
+                            </li>
+                        </apex:repeat>
+                    </div>
+                    <div style="font-size: 14px">
+                       <div style="color:#00c300;font-size: 16px;font-weight:BOLD;">
+                           Salesforce Development Skills
+                        </div>
+                        <apex:repeat var="skill" value="{!developmentSkills}">
+                            <li style="padding-bottom:10px;">
+                                {!skill}
+                            </li>
+                        </apex:repeat>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </body>
+</apex:page>

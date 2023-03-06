@@ -1,0 +1,36 @@
+<template>
+		
+				<div class="g">
+				<lightning-card title="Calculator" icon-name="custom:custom33" >
+				<lightning-input value={number1} 
+											   label="Number 1" 
+												 placeholder="Enter Value Here"
+												 onchange={handleChange}>
+				</lightning-input>	
+				<lightning-input value={number2} 
+											   label="Number 2" 
+												 placeholder="Enter Value Here"
+												 onchange={handleChange}>
+				</lightning-input>
+				<lightning-input value={total}
+												 placeholder="Total Value"
+												 slot="actions"
+												 >
+				</lightning-input>	
+						<br/> &nbsp;
+				<lightning-button label="SUM" variant="brand"  onclick={dosum} ></lightning-button> &nbsp;
+				<lightning-button label="SUB" variant="brand" onclick={dosub}></lightning-button> &nbsp;
+				<lightning-button label="MULTI" variant="brand" onclick={domulti}></lightning-button> &nbsp;
+				<lightning-button label="DIV" variant="brand" onclick={dodiv}></lightning-button> 	
+        </lightning-card>
+				</div>
+		
+<lightning-button label="Add Input" onclick={addInput}></lightning-button>
+<div lwc:dom="manual" class="container"></div>
+		
+<div class="img-zoom-container"  >
+  <img id="myimage" data-id="myimage" src="https://m.media-amazon.com/images/I/71vVn9x8LoL._SL1500_.jpg" width="300" height="240">
+  <div id="myresult" data-id="myresult"  class="img-zoom-result"></div>
+</div>
+		
+</template>

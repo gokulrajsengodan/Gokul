@@ -1,0 +1,168 @@
+<template>
+    <div if:true={loadSpinner} class="spinner-container slds-is-relative">
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </div>
+    <div class="slds-theme_default" ondblclick={handleRemove}>
+        <br /><br />
+        <div class="slds-combobox_container">
+            <div class={boxClass} aria-expanded="true" aria-haspopup="listbox" role="combobox">
+                <div class="slds-combobox__form-element" role="none">
+                    <div class="slds-col slds-no-flex slds-grid slds-align-bottom slds-shrink"
+                        data-aura-rendered-by="910:0">
+                        <b>Select Object :</b>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <template if:true={isValueSelected}>
+                            <div class="slds-pill-container">
+                                <lightning-pill class="pillSize" label={selectedObjectLabel}
+                                    onremove={handleRemovePill}>
+                                    <lightning-icon icon-name={iconName}></lightning-icon>
+                                </lightning-pill>
+                            </div>
+                        </template>
+                        <template if:false={isValueSelected}>
+                            <lightning-input class={inputClass} type="search" variant="label-hidden" label=""
+                                placeholder='Search Object' value={searchKey} onclick={handleClick} onchange={onChange}
+                                autocomplete="false">
+                            </lightning-input>
+                        </template>
+                    </div>
+                </div>
+                <div class="slds-col slds-no-flex slds-grid slds-align-bottom slds-shrink"
+                    data-aura-rendered-by="910:0">
+                    <template if:true={open}>
+                        <div class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid" role="listbox">
+                            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                <template for:each={listOfFields} for:item="rec">
+                                    <li key={rec.apiName} data-id={rec.apiName} data-name={rec.label}
+                                        data-icon={rec.iconName} onclick={onSelect} role="presentation">
+                                        <span class="slds-lookup__item-action" role="option">
+                                            <span class="slds-truncate">{rec.label}</span>
+                                        </span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+        <br /><br />
+    </div>
+    <div class="slds-theme_default" style="background-color: rgb(238, 238, 238);">
+        <div class="slds-p-around_medium lgc-bg list_view_and_table_container">
+            <lightning-tile label={selectedObjectLabelInList} title={selectedObjectLabelInList} type="media" href="#"
+                class="list_view_container">
+                <lightning-icon slot="media" icon-name={iconName} size="medium" class="icon_custom_class">
+                </lightning-icon>
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                        <div class="slds-combobox_container slds-size_small">
+                            <div aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                    role="none" onclick={handleClickExtend}>
+                                    <span class="current_filter">ALL
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </lightning-tile>
+            <div class="slds-grid " data-aura-rendered-by="377:0">
+                <div class="slds-col slds-align-bottom" data-aura-rendered-by="379:0">
+                    <p class="slds-text-body--small" data-aura-rendered-by="380:0">
+                        <span class="countSortedByFilteredBy">{recordsSize} item • </span>
+                    </p>
+                </div>
+                <div class="slds-col slds-no-flex slds-grid slds-align-bottom slds-shrink"
+                    data-aura-rendered-by="910:0">
+                    <lightning-button data-id="MassEmail" label="Mass Email" variant="brand" onclick={handleModalBox}
+                        disabled="true"></lightning-button>
+                    &nbsp;
+                    <lightning-input label={searchRecordLabel} type="search" placeholder={searchRecordLabel}
+                        variant="label-hidden" class={inputClass} onchange={searchRecordName} value={recordSearchKey}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-no-flex slds-grid slds-align-bottom" data-aura-rendered-by="384:0">
+                    <lightning-button-icon icon-name="utility:filterList" variant="border-filled"
+                        alternative-text="Filter List" class="slds-m-left_xx-small" title="Filter List"
+                        onclick={onChangeFilter}></lightning-button-icon>
+                </div>
+            </div>
+        </div>
+        <template if:true={openFilterPanel}>
+            <div class="slds-panel slds-size_medium slds-panel_docked slds-panel_docked-right slds-panel_drawer slds-is-open"
+                aria-hidden="false" id="example-unique-id-11">
+                <div class="slds-panel__body">
+                    <div class="slds-filters">
+                        <ol class="slds-list_vertical slds-list_vertical-space">
+                            <li class="slds-item slds-hint-parent">
+                                <div class="slds-filters__item slds-grid slds-grid_vertical-align-center">
+                                    <button class="slds-button_reset slds-grow slds-has-blur-focus">
+                                        <span class="slds-assistive-text">Edit filter:</span>
+                                        <span class="slds-show slds-text-body_small">Show Me</span>
+                                        <span class="slds-show">All Products</span>
+                                    </button>
+                                </div>
+                            </li>
+                        </ol>
+                        <h3 class="slds-text-body_small slds-m-vertical_x-small">Matching all these filters
+                        </h3>
+                        <div class="slds-filters__footer slds-grid slds-shrink-none">
+                            <button class="slds-button_reset slds-text-link">Add Filter</button>
+                            <button class="slds-button_reset slds-text-link slds-col_bump-left">Remove
+                                All</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <lightning-card style="background-color: rgb(238, 238, 238);">
+            <template if:false={isLoaded}>
+                <div class="spinner_class_div">
+                    <lightning-spinner class="spinner_class" alternative-text="Loading" variant="brand">
+                    </lightning-spinner>
+                </div>
+            </template>
+            <lightning-datatable key-field="Id" data={recordList} columns={columns} show-row-number-column="true"
+                sorted-by={sortBy} sorted-direction={sortDirection} onsort={handleSortdata}  onsave={handleSave}
+                draft-values={saveDraftValues}>
+            </lightning-datatable>
+        </lightning-card>
+    </div>
+    <!-- Modal Box 1st Screen -->
+    <c-modal data-id="composeEmailModal1stSCreen" header-name="Compose Email" modal-header-style="none" is-modal-absolute
+        modal-size="medium" content-style="height:350px;">
+        <span slot="content">
+            <lightning-combobox
+            name="progress"
+            label="Which Email Field Do you Prefer for Send Email"
+            value={value}
+            placeholder="Select Field"
+            options={options}
+            onchange={handleChange} ></lightning-combobox>
+        </span>
+        <span slot="footer">
+            <lightning-button label="Cancel" variant="neutral" data-modal-id="composeEmailModal1stSCreen"
+                onclick={handleCloseModal} class="slds-p-right--x-small">
+            </lightning-button>
+            <lightning-button label="Next" variant="brand" onclick={handleNextPage}>
+            </lightning-button>
+        </span>
+    </c-modal>
+    <!-- Modal Box 2nd Screen -->
+    <c-modal data-id="composeEmailModal" header-name="Compose Email" modal-header-style="none" is-modal-absolute
+        modal-size="medium" content-style="height:350px;">
+        <span slot="content">
+            <c-email-composer selected-records={selectRecordListFinal} onclosecomposeronsuccess={handleCloseModalOnSuccess}
+                data-modal-id="composeEmailModal"></c-email-composer>
+        </span>
+        <span slot="footer">
+            <lightning-button label="Cancel" variant="neutral" data-modal-id="composeEmailModal"
+                onclick={handleCloseModal} class="slds-p-right--x-small">
+            </lightning-button>
+            <lightning-button label="Send" variant="brand" onclick={sendMail}>
+            </lightning-button>
+        </span>
+    </c-modal>
+</template>

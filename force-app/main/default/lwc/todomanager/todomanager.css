@@ -1,0 +1,47 @@
+.container {
+    background-color: white;
+    padding: 16px;
+    max-height: 480px;
+    overflow-y: scroll;
+    display: block;
+}
+
+.greeting {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+/*
+.time {
+    font-size: 3rem;
+    font-weight: 600;
+} */
+
+.time
+{
+  background-image: linear-gradient(
+    -225deg,
+    black 0%,
+    gray 29%,
+    blueviolet 67%,
+    blueviolet 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 5s linear infinite;
+  display: inline-block;
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}

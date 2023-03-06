@@ -1,0 +1,40 @@
+<apex:page standardController="Contact" extensions="WorkItemController,WorkExtension" >
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Quick Start: Visualforce</title>
+        <!-- Import the Design System style sheet -->
+        <apex:slds />
+        
+    </head>
+    <body>
+        <apex:form >
+            <apex:pageBlock title="New Contact">
+                <!--Buttons -->
+                <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton action="{!save}" value="Save"/>
+                    <apex:commandButton action="{!edit}" value="Edit"/>
+                </apex:pageBlockButtons>
+                <!--Input form -->
+                <apex:pageBlockSection columns="1" title="Information" collapsible="false" >
+                    <apex:inputField value="{!Contact.Firstname}"/>
+                    <apex:inputField value="{!Contact.Lastname}"/>
+                    <apex:inputField value="{!Contact.Email}"/>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+        </apex:form>
+        <apex:pageBlock title="Work Item List" >
+            <apex:pageBlockTable value="{!workItemList}" var="work">
+                <apex:column value="{!Work.Name}"/>
+                <apex:column value="{!Work.Work_Type__c}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        <apex:pageBlock title="Work List">
+            <apex:pageBlockTable value="{!workList}" var="work" id="table">
+                <apex:column value="{!Work.Id}"/>
+                <apex:column value="{!Work.Name}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+    </body>
+</apex:page>

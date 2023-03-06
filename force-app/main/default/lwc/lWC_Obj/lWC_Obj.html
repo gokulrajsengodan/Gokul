@@ -1,0 +1,158 @@
+<template>
+		<table aria-describedby="conatact-list" class="slds-table  slds-table_bordered ">
+
+                        <!--Header of the table-->
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="slds-size_1-of-6 " scope="col">
+                                    <div class="slds-truncate " title="LWC Obj Name">LWC Obj Name</div>
+                                </th>
+                                <th class="slds-size_1-of-6 " scope="col">
+                                    <div class="slds-truncate " title="1st CheckBox">1st CheckBox</div>
+                                </th>
+                                <th class="slds-size_1-of-6 " scope="col">
+                                    <div class="slds-truncate " title="2nd CheckBox">2nd CheckBox</div>
+                                </th>
+                                <th class="slds-size_1-of-6" scope="col">
+																		<div class="slds-truncate " title="Description">Description</div>
+                                </th>
+														</tr>		
+                        </thead>
+
+                        <!--Body of the table-->
+                        <tbody>
+													 <template for:each={record} for:item="lwc">
+                                <tr key={lwc.Id} class="slds-hint-parent">
+																		<td class="slds-size_1-of-6">
+                                        <div>
+                                            {lwc.Name}
+                                        </div>
+                                    </td>
+                                    <td class="slds-size_1-of-6">
+                                        <div>
+                                             <lightning-input type="checkbox"  
+																												checked={lwc.X1st_CheckBox__c}		
+																												data-id={lwc.Name}
+																												onchange={handleCheckBox1}	></lightning-input>
+                                        </div>
+                                    </td>
+                                    <td class="slds-size_1-of-6">
+                                        <div>
+																						<lightning-input type="checkbox" 
+																												data-id={lwc.Name}
+																												checked={lwc.X2nd_CheckBox__c}
+																												onchange={handleCheckBox2}			></lightning-input>
+                                        </div>
+																		</td>
+                                    <td class="slds-size_1-of-6">
+                                        <div>
+																									{lwc.Description__c}
+                                        </div>
+                                    </td>
+																		<td class="slds-size_1-of-6">
+                                        <div class="buttonMenu">
+                                            <lightning-button-menu alternative-text="Toggle menu">
+                                                    <lightning-menu-item label="View" data-recid={lwc.Id} 
+																																				 onclick={showModal}>
+																										<!-- 		<template if:true={modalBox}>
+																												
+                                                            <c-lwc-modal  lwc={lwc.Id} open-modal="true"></c-lwc-modal>
+																													
+																												</template>	 -->	
+                                                    </lightning-menu-item>
+																								
+																											<lightning-menu-item label="Edit" data-recid={lwc.Id} 
+																							         onclick={showEditModal}>											
+                                                    </lightning-menu-item>
+                                            </lightning-button-menu>
+                                        </div>
+																		</td>
+															 </tr>
+														</template>
+				              </tbody>
+				</table>                                
+
+
+
+<template if:true={openModal}  >  
+     <div class="slds-modal slds-fade-in-open slds-backdrop" >  
+       <div class="slds-modal__container">  
+       <!-----    HEADER Section  -->
+          <div class="slds-modal__header">  
+             <lightning-button-icon icon-name="utility:close" alternative-text="Close this window" size="large"  
+                 variant="bare-inverse" onclick={closeModal} class="slds-modal__close">  
+             </lightning-button-icon>  
+                 {records}						
+          </div>  
+         <!------Body Section -->  
+		 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1" > 
+				 
+            <lightning-record-view-form
+								id="recordViewForm"												
+                 record-id={records}									
+                 object-api-name={objectApiName}>  
+								 <div class="slds-grid">   
+                    <div class="slds-col slds-size_1-of-2">
+												<!-- {records.Name} --> 
+                        <lightning-output-field field-name="Name"></lightning-output-field> 
+                        <lightning-output-field field-name="X1st_CheckBox__c"></lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-output-field field-name="X2nd_CheckBox__c"></lightning-output-field>
+                        <lightning-output-field field-name="Description__c"></lightning-output-field>
+                    </div>
+                </div>
+				 </lightning-record-view-form>
+      </div>  
+      <!-----     Footer Section 
+         <div class="slds-modal__footer">  
+           <lightning-button icon-name="utility:close" label="close" variant="brand" onclick={closeModal}>  
+           </lightning-button>  
+         </div>  -->
+       </div>  
+     </div>  
+   </template>
+		
+		<template if:true={openEditModal} >  
+     <div class="slds-modal slds-fade-in-open slds-backdrop" >  
+       <div class="slds-modal__container">  
+       <!-----    HEADER Section  -->
+          <div class="slds-modal__header">  
+             <lightning-button-icon icon-name="utility:close" alternative-text="Close this window" size="large"  
+                 variant="bare-inverse" onclick={closeModal} class="slds-modal__close">  
+             </lightning-button-icon>  
+                 {records}						
+          </div>  
+         <!------Body Section -->  
+		 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2" > 
+				 
+            <lightning-record-edit-form
+								id="recordEditForm"												
+                 record-id={records}									
+                 object-api-name={objectApiName}
+								 onsuccess={handleSuccess} onsubmit ={handleSubmit} >  
+								 <div class="slds-grid">   
+                    <div class="slds-col slds-size_1-of-2">
+												<!-- {records.Name} --> 
+                        <lightning-output-field field-name="Name"></lightning-output-field> 
+                        <lightning-input-field field-name="X1st_CheckBox__c"></lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-input-field field-name="X2nd_CheckBox__c"></lightning-input-field>
+                        <lightning-input-field field-name="Description__c"></lightning-input-field>
+                    </div>
+                </div>
+								<lightning-button class="slds-m-top_small" variant="brand" type="submit" name="update" label="Save" onclick={handleSave}>
+        </lightning-button>
+				 </lightning-record-edit-form>
+      </div>  
+      <!-----     Footer Section -->
+         <div class="slds-modal__footer">  
+						 <lightning-button icon-name="utility:cancel_transfer" label="Cancel" variant="brand" onclick={closeModal}>  
+           </lightning-button>
+         </div>  
+       </div>  
+     </div>  
+   </template>
+		
+</template>

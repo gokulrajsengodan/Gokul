@@ -1,0 +1,36 @@
+<apex:page controller="WorkItemController">
+    <apex:form >
+        <apex:pageBlock title="Work Item Form" id="page" >
+            <apex:pageMessages />
+            <apex:pageBlockSection columns="1" >
+                <apex:inputField label="Work Item Name" value="{!work.Name}" required="true"/>
+                <apex:inputField label="Work Type" value="{!work.Work_Type__c}" />
+                <apex:selectRadio label="Work Time" value="{!work.Work_Time__c}">
+                    <apex:selectOptions value="{!time}" />
+                </apex:selectRadio>
+                <apex:inputField label="Start Date/Time" value="{!work.Start_Date_Time__c}"/>
+                <apex:inputField label="Finish Date/Time" value="{!work.Finish_Date_Time__c}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:dataTable value="{!workItemList}" id="theTable" var="WorkList" width="200%">
+                    <apex:facet name="caption"><b>Work Item List</b><br/><br/></apex:facet><br/>
+                    <apex:column headerValue="Work Item Name"><apex:outputText value="{!WorkList.Name}" ></apex:outputText></apex:column>
+                    <apex:column headerValue="Work Item Time"><apex:outputText value="{!WorkList.Work_Time__c}"></apex:outputText></apex:column>
+                    <apex:column headerValue="Work Item Type"><apex:outputText value="{!WorkList.Work_Type__c}"></apex:outputText></apex:column>
+                    <apex:column headerValue="Work Item Start Date Time"><apex:outputText value="{!WorkList.Start_Date_Time__c}"></apex:outputText></apex:column>
+                    <apex:column headerValue="Work Item Finsih Date Time"><apex:outputText value="{!WorkList.Id}"></apex:outputText></apex:column>
+                  <apex:column >
+                      <apex:commandLink value="Edit" action="{!editaction}" reRender="page,theTable">
+                          <apex:param name="cid" value="{!WorkList.Id}" assignTo="{!editId}"/>
+                      </apex:commandLink>
+                    </apex:column>
+                </apex:dataTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

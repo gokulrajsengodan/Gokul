@@ -1,0 +1,15 @@
+<template>
+		<div if:true={spinner} class="exampleHolder">
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+    <lightning-card icon-name="custom:custom19" title='Opportunity & Contact Upload'>
+        <div style="margin-left: 3%">
+            <lightning-file-upload accept={acceptedCSVFormats} 
+                                label="" 
+                                multiple="multiple" 
+                                onuploadfinished={uploadFileHandler} 
+                                record-id={recordId}></lightning-file-upload>
+        </div>
+
+    </lightning-card>
+</template>

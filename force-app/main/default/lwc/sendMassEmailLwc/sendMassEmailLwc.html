@@ -1,0 +1,30 @@
+<template>
+		<c-modal
+						 data-id="composeEmailModal"
+						 header-name="Compose Email"
+						 modal-header-style="none"
+						 is-modal-absolute
+						 modal-size="medium"
+						 content-style="height:350px;"
+						 >
+				<span slot="content">
+						<c-email-composer
+															selected-records={recordList}
+															onclosecomposeronsuccess={handleCloseModalOnSuccess}
+															data-modal-id="composeEmailModal"
+															></c-email-composer>
+				</span>
+				<span slot="footer">
+						<lightning-button
+															label="Cancel"
+															variant="neutral"
+															data-modal-id="composeEmailModal"
+															onclick={handleCloseModal}
+															class="slds-p-right--x-small"
+															>
+						</lightning-button>
+						<lightning-button label="Send" variant="brand" onclick={sendMail}>
+						</lightning-button>
+				</span>
+		</c-modal>
+</template>

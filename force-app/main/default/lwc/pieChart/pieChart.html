@@ -1,0 +1,13 @@
+<template>
+<template if:true={opp}>
+    <lightning-combobox name="level"
+                                label="Level"
+                                value={value}
+                                placeholder="-Select-"
+                                options={size}
+												onchange={handleChange}
+                                >
+    </lightning-combobox>
+		<p>Selected value is: {value}</p>
+</template>
+</template>

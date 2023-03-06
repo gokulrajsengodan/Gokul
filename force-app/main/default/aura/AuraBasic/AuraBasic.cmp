@@ -1,0 +1,24 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="Var1" type="String" default="Test Aura" ></aura:attribute>
+    <aura:attribute name="Var2" type="String" ></aura:attribute>
+    <aura:attribute name="acc" type="Account" default="{'sobjectType':'Account','Name':'Gokul'}" ></aura:attribute>
+    <aura:handler name="init" value="{!this}" action="{!c.handleVariable}"/> 
+    <p>This is the first aura compoent name : {!v.Var1}</p>
+    <p>This is the first aura compoent name : {!v.Var2}</p>
+    <h1> {!v.acc.Name}
+    </h1><hr/>
+    <aura:attribute name="arrayDemo" type="String[]" default="['V1','V2','V3']" ></aura:attribute>
+    <aura:attribute name="listDemo" type="List" default="['List1','List2','List3']" ></aura:attribute>   
+    <aura:attribute name="setDemo" type="Set" default="['Set1','Set2','Set3']" ></aura:attribute>
+    <aura:attribute name="mapDemo" type="Map" default="{a:'Map1',b:'Map2',c:'Map3'}"></aura:attribute>
+    <aura:attribute name="jsobjectDemo" type="Object[]" default="[{a:'Map1',b:'Map2',c:'Map3'}]"></aura:attribute>
+    <aura:attribute name="jsObject" type="Object"></aura:attribute>
+    <aura:attribute name="userData" type="AuraWrapper.WrapperTest"></aura:attribute>
+    Array Values : {!v.arrayDemo[2]} <hr/>
+    List Values : {!v.listDemo[2]}<br/> List Length : {!v.listDemo.length}<hr/>
+    Set Values : {!v.setDemo[2]} <hr/>
+    Map Values : {!v.mapDemo.c} <hr/>
+    Array of Object Values : {!v.jsobjectDemo[0].a} <hr/>
+    Array of Object from Controller : {!v.jsObject.Name} - {!v.jsObject.Email} <hr/>
+    Get Values from Apex Wrapper class : {!v.userData.stringValue} - {!v.userData.intValue}
+</aura:component>

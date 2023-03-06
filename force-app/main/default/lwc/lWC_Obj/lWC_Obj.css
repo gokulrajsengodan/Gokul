@@ -1,0 +1,10 @@
+.dummyClass{color:black;}
+.slds-modal__container {
+    max-width: 80rem !important;
+    width: 80% !important;
+}
+.slds-modal__content {
+		height:600px;
+      overflow: visible;
+      overflow-y: auto;
+}

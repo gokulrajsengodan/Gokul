@@ -1,0 +1,46 @@
+<template>
+<template if:true={openModal} >  
+     <div class="slds-modal slds-fade-in-open slds-backdrop" key={lwc.Id}>  
+        <div class="slds-modal__container">  
+          <!------HEADER Section-->  
+          <div class="slds-modal__header">  
+             <lightning-button-icon icon-name="utility:close" alternative-text="Close this window" size="large"  
+                 variant="bare-inverse" onclick={closeModal} class="slds-modal__close">  
+             </lightning-button-icon>  
+                 {lwc.Name} 
+          </div>  
+         <!------Body Section-->  
+         <div class="slds-modal__content slds-p-around_medium">  
+            <lightning-record-view-form
+                     record-id={lwc.Id}
+                      object-api-name="LWC_Objs__c"
+									    onchange={handleChange}  >
+                  <div class="slds-grid slds-wrap">
+											<div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field field-name="Name">		
+												    </lightning-output-field>		
+                      </div>
+											<div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field field-name="X1st_CheckBox__c">				
+                            </lightning-output-field>
+											</div>	
+                      <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field field-name="X2st_CheckBox__c">	
+													  </lightning-output-field>		
+                      </div>
+											<div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field field-name="Description__c">	
+											      </lightning-output-field>		
+                      </div>
+                   </div>
+             </lightning-record-view-form>
+         </div>  
+         <!------Footer Section-->  
+         <div class="slds-modal__footer">  
+           <lightning-button icon-name="utility:close" label="close" variant="brand" onclick={closeModal}>  
+           </lightning-button>  
+         </div>  
+       </div>  
+     </div>  
+   </template> 		
+</template>

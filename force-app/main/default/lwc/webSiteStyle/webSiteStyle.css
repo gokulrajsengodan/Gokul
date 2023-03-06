@@ -1,0 +1,95 @@
+.modal-container {
+    height : var(--modalHeight);
+}
+.tabStyle{
+		display:flex;
+		background-color:gray;
+}
+.tabActive{
+		background-color:orange;
+		font-weight:BOLD;
+}
+.btn-group button {
+  background-color: gray; /* Green background */
+  border: 1px solid gray; /* Green border */
+  color: white; /* White text */ /* Some padding */
+  width:25%;
+  height: 40px;
+}
+.btn-group-option option {
+  background-color: gray; /* Green background */
+  border: 1px solid white; /* Green border */
+  color: white; /* White text */ /* Some padding */
+  width:25%;
+  height: 40px;
+  display: block; 
+		padding-top: 9px;
+}
+.btn-group {
+  width:100%; /* Green border */
+}
+.btn-group-option {
+ text-align:-webkit-center;
+}
+.btn-group button:hover {
+  background-color: lightgray;
+}
+.btn-group-option option:hover {
+  background-color: lightgray;
+}
+img:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.selected {
+    border-color: red; /* will overwrite color, only */
+}
+.caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 50%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.caption span {
+  display: inline-block;
+  padding: 10px;
+  color: #fff;
+  background: rgba(0,0,0,0.5);
+  font-family: 'Myriad Pro regular';
+  font-size: 15.31px;
+}
+.image_grid {
+  display: inline-block;
+  padding-left: 25px;
+}
+.image_grid label {
+  position: relative;
+  display: inline-block;
+}
+.image_grid img {
+  width:50%;
+  display: block;
+}
+.image_grid input {
+  width:50%;
+  display: none;
+}
+
+.image_grid input:checked + .caption {
+  background: rgba(0,0,0,0.5);
+}
+.image_grid input:checked + .caption::after {
+  content: '✔';    
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  color: white;
+  font-size: 40px;
+  line-height: 80px;
+  text-align: center;
+  height: 190px;
+  width:50%;
+}

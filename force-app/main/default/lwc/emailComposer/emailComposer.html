@@ -1,0 +1,75 @@
+<template>
+    <template if:true={loaded}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+    <!---Part 4 [mail form part]-->
+    <div class="slds-m-around--medium">
+        <div class="slds-container--medium">
+            <div class="slds-form--stacked">
+                <div class="slds-form-element__control">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <lightning-combobox name="progress" label="Email Template" required value={templateId}
+                                placeholder="Select Template" options={emailTemplateOptions}
+                                onchange={onSelectEmailTemplate} message-when-value-missing="Email Template is missing">
+                            </lightning-combobox>
+                        </div>
+                    </div>
+
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <label class="slds-form-element__label" for="CC">Email</label>
+                            <div class="slds-form-element__control">
+                                <lightning-pill-container items={emailList} onitemremove={handleEmailRemove}>
+                                </lightning-pill-container>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <lightning-combobox
+                              name="FromAddress"
+                              label="From Address"
+                              value={fromAddress}
+                              placeholder="Select From Address"
+                              options={fromAddressOptions}
+                              onchange={onSelectFromAddress}
+                            ></lightning-combobox>
+                        </div>
+                    </div>
+
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                          <lightning-input
+                            label="CC Address"
+                            value={ccAddress}
+                            name="ccAddress"
+                            onchange={handleCcAddressChange}
+                            placeholder="CC Address"
+                          ></lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <lightning-input label="Subject" required value={subject} name="subject"
+                                onchange={handleSubjectChange} placeholder="Subject"
+                                message-when-value-missing="Subject is missing"></lightning-input>
+                        </div>
+                    </div>
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="textareaSample2">Mail Body</label>
+                        <div class="slds-form-element__control">
+
+
+                            <lightning-input-rich-text value={emailbody} onchange={handleEmailBodyChange} required>
+                            </lightning-input-rich-text>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

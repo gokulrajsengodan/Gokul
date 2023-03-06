@@ -1,0 +1,37 @@
+<template>
+    <div style="background: rgb(248, 245, 247); border-radius: 10px;">
+        <div style="border: 2px solid red; width: 30px; height: 30px; border-radius: 50%; 
+        margin-left: 1313px;
+        margin-bottom: -30px;
+        text-align: center;
+        font-size: 19px;">
+             <strong class="slds-m-top_small" style="text-align:center; vertical-align:center;">{itemsinCart}</strong>
+        </div>
+        <div style="margin-right: 1300px;" >
+            <lightning-dynamic-icon
+                 type="eq"
+                 option="play" 
+                 alternative-text="Recording in progress">
+           </lightning-dynamic-icon>
+        </div>   
+        <div style="margin-left: 1300px;" >
+          <a href="JavaScript:void(0);" onclick={navigateToCartDetail} >       
+            <img src={cart} height="70" width="80" /> 
+          </a>
+        </div>    
+        <div class="slds-m-left_small slds-m-right_small slds-m-bottom_small">
+            <c-beer-search onsearch={handleEvent} ></c-beer-search>
+        </div>  
+        <div class="slds-m-left_small slds-m-right_small slds-m-bottom_small">
+            <template if:true={beerRecord} >
+                <div class="slds-grid slds-wrap">
+                    <template for:each={beerRecord} for:item="item">
+                            <div class="slds-col slds-size_1-of-3 " key={item.Id} >   
+                                <c-beer-tile  beer-record={item} onvalue={addToCart}> </c-beer-tile>
+                            </div>
+                    </template>
+                </div>
+            </template>
+        </div>    
+    </div>
+</template>

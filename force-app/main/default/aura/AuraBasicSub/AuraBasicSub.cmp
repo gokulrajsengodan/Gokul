@@ -1,0 +1,3 @@
+<aura:component >
+	<c:AuraBasic Var1="Aura Sub Component"></c:AuraBasic>
+</aura:component>

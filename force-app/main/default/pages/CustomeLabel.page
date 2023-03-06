@@ -1,0 +1,10 @@
+<apex:page standardController="Account" >
+    <apex:pageBlock title="list">
+        <apex:outputText >
+          <h1>
+              Hi !
+              {!$Label.Welcome_Custom_Label}
+            </h1>
+        </apex:outputText>
+    </apex:pageBlock>
+</apex:page>

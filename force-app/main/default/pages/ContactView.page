@@ -1,0 +1,22 @@
+<apex:page standardController="Contact" >
+    <apex:pageBlock title="Contact Summary">
+        <apex:pageBlockSection >
+            First Name: {! Contact.FirstName } <br/>
+            Last Name: {! Contact.lastName } <br/>
+            Owner Email: {! Contact.Owner.Email } <br/>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    <apex:pageBlock title="Cuurent User Summary">
+        <apex:pageBlockSection columns="1">
+            <apex:outputText value="{! $User.FirstName }" label="First Name" />
+            <apex:outputText value="{! $User.LastName }" label="Last Name" />
+            <apex:outputText value="{! $User.Email }" label="User Email" />
+            <apex:outputText value="{! $CurrentPage.Name }" label="Current Page Name" />
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    <p>
+        {! if(contains('com','Salesforce.com'),'Yes','No')} <br/>
+        {! if($User.isActive,$User.UserName,'Inactive')}
+    </p>
+    <apex:image url="{!URLFOR('https://www.royalchallengers.com/themes/custom/rcbbase/images/rcb-logo-new.png')}" width="100" height="100"/>
+</apex:page>

@@ -1,0 +1,9 @@
+<aura:component >
+    <aura:attribute name="message1" type="String" ></aura:attribute>
+    Button Label : {!v.message1} <br/><br/>
+    <lightning:button label="Button 1" onclick="{!c.handleButton1}"></lightning:button>
+    <lightning:button label="Button 2" onclick="{!c.handleButton1}"></lightning:button><hr/>
+    <aura:attribute name="message2" type="String" ></aura:attribute>
+    Button Label : {!v.message2} <br/><br/>
+    <lightning:input label="Text" type="String" onchange="{!c.handleInputChange}"></lightning:input><hr/>
+</aura:component>

@@ -1,0 +1,21 @@
+h1,h4{
+    width: 80%;
+    text-align: center;
+}
+
+div{
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+h1{
+    font-size: 24px;
+}
+
+h4{
+    font-size: 16px;
+}
+
+.custom-lookup{
+    margin: 20px 0 0 0 !important;
+}

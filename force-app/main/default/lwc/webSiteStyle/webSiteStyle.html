@@ -1,0 +1,67 @@
+<template>
+<div class="slds-theme_default">
+
+	<!-- Modal Container 
+	<div class="modal-container">
+
+		GOKUL
+
+	</div>   -->
+	<div class="size" style="text-align: right;">
+		<button style="background-color: gray;border: 1px solid green;color: white;width:15%;height: 40px;"
+		data-id="button1" onclick={onChangeColor} >STEP {orderNumber}/{size}</button>
+	</div>
+<!-- <div class="slds-tabs_scoped">
+			<ul class="tabStyle" role="tablist">
+					<lightning-layout multiple-rows>
+				<template for:each={content} for:item="obj" for:index="index">
+						<lightning-layout-item size="3" padding="around-small"  key={obj.name} >
+					<li  key={obj.name} title={obj.name} role="presentation">
+						<a class="slds-tabs_scoped__link" data-index={index} onclick={tabChange} href="#" role="tab"
+							tabindex="0" aria-selected="true" aria-controls={index} id={obj.name}>{obj.name}</a>
+					</li>
+								</lightning-layout-item>
+				</template>
+							</lightning-layout>
+					
+			</ul>
+		</div>  -->
+	<div class="btn-group">
+		<template for:each={content} for:item="obj" for:index="index">
+			<button key={obj.name}  data-name={obj.name} data-order={obj.order} data-id="button" onclick={onChangeColor}>{obj.name}</button>
+		</template>
+	</div>
+	<div class="body" style="height:450px;border: 2px solid green;"></br>
+		<template if:true={showContent}>
+			<center style=" font-size: 40px;">{selectContent.question}</center>
+			<center style=" font-size: 20px;">SELECT ONE</center></br>
+			<div class="btn-group-option">
+				<template for:each={selectContent.option} for:item="obj" for:index="index">
+					<template if:false={selectContent.isImage}>
+						<option key={obj.value}  data-name={obj.value} data-order={obj.value} data-id="button" onclick={handleValueChange}>{obj.value}</option>
+					</template>
+					<template if:true={selectContent.isImage}>
+					<!--	<img src={obj} key={obj} style="height: 190px;width:25%;"> &nbsp;&nbsp;  -->
+
+
+								<img clas="selected" src={obj.value} key={obj.value} style="height: 190px;width:50%;">
+
+					</template>
+				</template>
+			</div></br>
+		</template>
+		<div style="text-align: center;">
+			<template if:true={previousBtnShow}>
+				<button  style="background-color: gray;border: 1px solid green;color: white;width:15%;height: 40px;"
+		data-name="Previous"  onclick={onPageLogic}>PREVIOUS</button>&nbsp;&nbsp;&nbsp;&nbsp;
+			</template>
+			<template if:true={nextBtnShow}>
+				<button  style="background-color: gray;border: 1px solid green;color: white;width:15%;height: 40px;"
+		data-name="Next"  onclick={onPageLogic}>NEXT</button>
+			</template>
+		</div>
+	</div>
+</div>
+
+
+</template>

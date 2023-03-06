@@ -1,0 +1,24 @@
+<template>
+		<lightning-card title="Date Value" icon-name="custom:custom9">
+		<lightning-button label="Date Change" 
+											variant="brand" 
+											onclick={handleClick}>
+		</lightning-button>
+		<lightning-input label="Price" 
+										 value={p}>
+		</lightning-input>
+		<lightning-input label="Time" 
+										 value={t}>
+		</lightning-input>
+		<lightning-input label="Interest" 
+										 type="number"
+										 formatter="percent-fixed" 
+										 step="1"
+										 value={r}>
+		</lightning-input>
+		</lightning-card>
+		<lightning-button label="Calaculation" 
+											variant="brand" 
+											onclick={handleChange}>
+		</lightning-button>
+</template>

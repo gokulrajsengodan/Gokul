@@ -1,0 +1,24 @@
+<template>
+    <lightning-card>
+        <div>
+            <h1>LWC Lookup Demo</h1>
+            <h4>New Opportunity</h4>
+            <lightning-input type="text" placeholder="Opportunity Name" value={oppRecord.Name}></lightning-input>
+
+            <lightning-input type="date" placeholder="Close Date" value={oppRecord.CloseDate}></lightning-input>
+
+            <lightning-input type="number" placeholder="Amount" value={oppRecord.Amount}></lightning-input>
+
+            <c-lookup-lwc unique-key="AccountId" obj-name="Account" icon-name="standard:account" label-name="Account"
+                display-fields="Name, AccountNumber, Owner.FirstName" display-format="Name (AccountNumber) (Owner.FirstName)"
+                onvalueselect={handleSelection} placeholder="Search Accounts" value-id="00190000009J8mmAAC1" create-record=true read-only="true" class="custom-lookup">
+            </c-lookup-lwc>
+
+            <c-lookup-lwc unique-key="ContactId" obj-name="Contact" icon-name="standard:contact" label-name="Contact"
+                display-fields="FirstName, LastName, Email" display-format="FirstName LastName (Email)"
+                onvalueselect={handleSelection} placeholder="Search Contacts" filters={dependentFilters}
+                class="custom-lookup">
+            </c-lookup-lwc>
+        </div>
+    </lightning-card>
+</template>

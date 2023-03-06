@@ -1,0 +1,10 @@
+<aura:component controller="AccountController">
+	<aura:attribute name="accList" type="List"></aura:attribute>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"></aura:handler>
+    <lightning:select name="Account List" label="Select One Account">
+    <option value="Null">None</option>
+    <aura:iteration items="{!v.accList}" var="acc">
+        <option value="{!acc.Id}">{!acc.Name}</option>
+        </aura:iteration>
+    </lightning:select>
+</aura:component>
